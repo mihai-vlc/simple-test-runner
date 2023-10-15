@@ -1,11 +1,14 @@
-const test = require("./sfcc-test")("my-app");
+const test = require("./simple-test-runner")("my-app");
 
+let startTime;
 test.before(function (t) {
+    startTime = new Date().getTime();
     t.log(t.name + "   ");
 });
 
 test.after(function (t) {
-    t.log("\n");
+    const time = new Date().getTime() - startTime;
+    t.log("  " + time + "ms \n");
 });
 
 test("should calculate 2 + 2", function (t) {
